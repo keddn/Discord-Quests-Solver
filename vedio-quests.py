@@ -1,4 +1,3 @@
-
 import requests
 import time
 import random
@@ -23,15 +22,23 @@ print(f" - Accept Quest {QUEST_ID}")
 
 t = 0
 while True:
-    t += random.uniform(0.5, 2)
+    t += random.uniform(0.5, 40)
     try:
         r = requests.post(f"https://discord.com/api/v9/quests/{QUEST_ID}/video-progress",
             json={'timestamp': t},
             headers={'authorization': TOKEN, 'content-type': 'application/json', 'x-super-properties': SUPER})
-        print(f"{t:.1f}s - just wait..{r.text}")
+
+        print(f"{t:.1f}s - just wait..{r.status_code}")
+
+        if '"message": "400: Bad Request", "code": 0' in r.text or "400" in r.text:
+
+            t = 0
+            continue
+
         if '"completed_at":null' not in r.text and 'completed_at' in r.text:
             print("Quest complet!")
             break
+
     except:
         pass
         time.sleep(1)
