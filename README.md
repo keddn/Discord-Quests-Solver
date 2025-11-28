@@ -1,5 +1,4 @@
 # Discord-Quests-Solver
-full source :)
 
 tutorial: https://youtu.be/TFoC9lhP8MA?si=_8AKnUkCjyUFaJRf
 
